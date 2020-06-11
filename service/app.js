@@ -12,12 +12,16 @@ import chokidar from "chokidar";
 
 // callback(path,event)=> path 指代监听的路径
 class App{
-    constructor(){
+    constructor(middlewares,port){
+        console.log(111,this,this)
         this.app = new Koa();
-        this.isListen = false
+        this.isListen = false;
+        this.middlewares = middlewares;
+        this.port = port
     }
     runDevTodo(){
         
+    
     }
     runDev(){
         const watcher = chokidar.watch(join(__dirname,"../src/page"),{
@@ -36,3 +40,5 @@ class App{
         })
     }
 }
+
+module.exports = App

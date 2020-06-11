@@ -1,2 +1,3 @@
-require("@babel/register")();
+require("./nodeRuntime")()
+require('@babel/register')()
 require('../service')
