@@ -1,6 +1,9 @@
 import Koa from "koa"
-import {join,resolve} from "lodash"
+// import {join,resolve} from "lodash"
+import {path, resolve } from "path"
 import chokidar from "chokidar";
+import RouterAnalyze from "@lib/analyze"
+const entry = resolve(__dirname,"../src/page")
 
 
 // add 新增文件时触发
@@ -13,15 +16,14 @@ import chokidar from "chokidar";
 // callback(path,event)=> path 指代监听的路径
 class App{
     constructor(middlewares,port){
-        console.log(111,this,this)
         this.app = new Koa();
-        this.isListen = false;
+        this.isListen  = false;
         this.middlewares = middlewares;
         this.port = port
     }
     runDevTodo(){
+        new RouterAnalyze(entry)
         
-    
     }
     runDev(){
         const watcher = chokidar.watch(join(__dirname,"../src/page"),{
@@ -29,6 +31,7 @@ class App{
             persistent: true //与原生fs.watch一样,表示是否保护进程不退出持久监听，默认值为true
         })
         watcher.on("all",event=>{
+            console.log("event",event);
             if(this.isListen && (
                 event.includes("add")||
                 event.includes("unlink")||

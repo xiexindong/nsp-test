@@ -7,7 +7,9 @@ let middlewares = ["bodyParser", "log", "views", "staticCache", "router"];
 try{
   const Server = new App(middlewares,port)
     if(env == "development"){
-        console.log(port,env)
+        Server.runDevTodo()
+    }else{
+        Server.runProTodo()
     }
 
 }catch(e){
