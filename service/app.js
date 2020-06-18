@@ -1,9 +1,11 @@
 import Koa from "koa"
 // import {join,resolve} from "lodash"
 import {path, resolve } from "path"
+import chalk from "chalk"
 import chokidar from "chokidar";
 import RouterAnalyze from "@lib/analyze"
 const entry = resolve(__dirname,"../src/page")
+const output = resolve(__dirname,"../src/.nsp/router.js")
 
 
 // add 新增文件时触发
@@ -22,7 +24,7 @@ class App{
         this.port = port
     }
     runDevTodo(){
-        new RouterAnalyze(entry)
+        new RouterAnalyze(entry,output)
         
     }
     runDev(){
@@ -38,9 +40,17 @@ class App{
                 event.includes("addDir")||
                 event.includes("unlinkDir")
             )){
-                this.runDevTodo()
+                this.runDevTodo();
             }
         })
+        watcher.on("ready",()=>{
+            console.log(chalk.green("Initial watcher complete,Ready for changes"));
+            this.runDevTodo();
+        })
+
+        if(!this.isListen){
+            
+        }
     }
 }
 
