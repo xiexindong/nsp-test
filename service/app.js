@@ -1,6 +1,7 @@
 import Koa from "koa"
 // import {join,resolve} from "lodash"
 import {path, resolve } from "path"
+import R from "ramda";
 import chalk from "chalk"
 import chokidar from "chokidar";
 import RouterAnalyze from "@lib/analyze"
@@ -23,8 +24,17 @@ class App{
         this.middlewares = middlewares;
         this.port = port
     }
+    createHttpServer(){
+
+    }
     runDevTodo(){
-        new RouterAnalyze(entry,output)
+        new RouterAnalyze(entry,output,()=>{
+            if(!this.isListen){
+                dev(this.app,()=>{
+                    !this.isListen && this.createHttpServer();
+                })
+            }
+        })
         
     }
     runDev(){
@@ -33,7 +43,6 @@ class App{
             persistent: true //与原生fs.watch一样,表示是否保护进程不退出持久监听，默认值为true
         })
         watcher.on("all",event=>{
-            console.log("event",event);
             if(this.isListen && (
                 event.includes("add")||
                 event.includes("unlink")||
@@ -48,9 +57,7 @@ class App{
             this.runDevTodo();
         })
 
-        if(!this.isListen){
-            
-        }
+        
     }
 }
 

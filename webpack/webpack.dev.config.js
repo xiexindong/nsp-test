@@ -17,7 +17,7 @@ devconfig.entry.assets.push("webpack-hot-middleware/client?path=/__webpack_hmr&t
 
 devconfig.mode = "development";
 
-devconfig.plugins.push(new webpack.HotModuleReplacementPlugin)
+devconfig.plugins.push(new webpack.HotModuleReplacementPlugin())
 
 
 
