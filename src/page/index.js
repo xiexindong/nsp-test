@@ -1,11 +1,9 @@
 import React from "react"
 
-
-
-export default class Home extends React.PureComponent{
+class Home extends React.Component{
     render(){
-        return<div>11111</div>
+        return<div>222</div>
     }
 }
 
-
+export default Home

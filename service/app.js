@@ -1,10 +1,11 @@
 import Koa from "koa"
-// import {join,resolve} from "lodash"
-import {path, resolve } from "path"
+import Loadable from "nsploadable";
+import {resolve,join} from "path"
 import R from "ramda";
 import chalk from "chalk"
 import chokidar from "chokidar";
 import RouterAnalyze from "@lib/analyze"
+import dev from "./utils/dev"
 const entry = resolve(__dirname,"../src/page")
 const output = resolve(__dirname,"../src/.nsp/router.js")
 
@@ -24,8 +25,36 @@ class App{
         this.middlewares = middlewares;
         this.port = port
     }
+    useMiddleware(){
+        const joinPathName = moduleName =>{
+            return join(__dirname,`./middleware_app/${moduleName}`);
+          }
+          
+      
+          const requirePath = pathName => require(pathName);
+      
+          const useMiddleware = R.forEachObjIndexed(middlewaresUseByApp =>{
+            return middlewaresUseByApp(this.app)
+            }
+          );
+          
+        
+          const Rcompose = R.compose(useMiddleware, requirePath,joinPathName);
+      
+          R.map(Rcompose)(this.middlewares);
+    }
     createHttpServer(){
-
+        this.useMiddleware();
+        Loadable.preloadAll().then(() => {
+            this.app.listen(this.port, err => {
+              console.log(
+                chalk.green(
+                  `Nsp is Listening on port ${this.port}. Open up http://localhost:${this.port}/ in your browser.\n`
+                )
+              );
+              this.isListen = true;
+            });
+          });
     }
     runDevTodo(){
         new RouterAnalyze(entry,output,()=>{

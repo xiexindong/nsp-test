@@ -1,6 +1,7 @@
 import webpackDevMiddleware from "webpack-dev-middleware";
 
 export default (compiler, options) => {
+ 
   const devMiddleware = webpackDevMiddleware(compiler, options);
   const koaMiddleware = (ctx, next) => {
     const res = {};

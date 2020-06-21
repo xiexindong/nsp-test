@@ -1,4 +1,4 @@
 export default {
-    port:8082,
+    port:8080,
     env:"production"
 }
