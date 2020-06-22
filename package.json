@@ -14,8 +14,11 @@
   "dependencies": {
     "babel-plugin-module-resolver": "^3.2.0",
     "chokidar": "^3.4.0",
+    "glob": "^7.1.6",
     "happypack": "^5.0.1",
     "koa": "^2.12.0",
+    "koa-router": "^9.0.1",
+    "koa-views": "^6.2.3",
     "lodash": "^4.17.15",
     "nsploadable": "0.0.2",
     "react": "^16.13.1",
