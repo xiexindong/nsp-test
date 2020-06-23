@@ -2,7 +2,7 @@ import App from "./app";
 import config from "../config"
 
 const { port,env } = config
-let middlewares = ["bodyParser"];
+let middlewares = ["bodyParser","views","router"];
 
 try{
   const Server = new App(middlewares,port)

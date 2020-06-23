@@ -39,7 +39,11 @@ class App{
           );
           
         
-          const Rcompose = R.compose(useMiddleware, requirePath,joinPathName);
+          const Rcompose = R.compose(useMiddleware,(item)=>{
+            console.log("this.app",this.app);
+            console.log("item",item)
+            return item
+        }, requirePath,joinPathName);
       
           R.map(Rcompose)(this.middlewares);
     }
