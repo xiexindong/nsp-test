@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="keywords" content="NSP" />
+    <meta name="description" content="NSP" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+    <title><%= title %></title>
+    <link
+      href="https://node-file-bucket.oss-cn-hangzhou.aliyuncs.com/static/antd.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://node-file-bucket.oss-cn-hangzhou.aliyuncs.com/static/reset.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//at.alicdn.com/t/font_1031555_f973aq5rr7g.css"
+    />
+    <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
+    <%- styles %>
+  </head>
+  <script>
+    window.__initModel__ =<%- JSON.stringify(initModel) %>
+  </script>
+  <body>
+    <div id="app"><%- html %></div>
+    <%- scripts %>
+  </body>
+</html>
